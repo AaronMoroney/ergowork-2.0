@@ -1,11 +1,16 @@
+import { useState } from "react";
 import {
+    Button,
     Card, 
     Stack, 
     Typography,   
 } from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import MinimizeIcon from '@mui/icons-material/Minimize';
 
 import { Settings } from "../../../features/water/settings";
+import { ControlPanel } from "../../../features/water/control-panel";
 
 const styles = {
     header: {
@@ -35,7 +40,13 @@ const styles = {
     }
 }
 
-const PostureWidget = () => {
+const WaterWidget = () => {
+    const [toggleSettings, setToggleSettings] = useState(false);
+
+    const handleToggleSettings = () => {
+        setToggleSettings(!toggleSettings)
+    }
+
     return (
         <>
             <Card sx={styles.styled__card}>
@@ -44,12 +55,22 @@ const PostureWidget = () => {
                         variant="h1"
                         sx={styles.title__typography}
                     >
-                        Water Timer 💧
+                        Water Timer
                     </Typography>
-                    <SettingsIcon/>
+                    <Button 
+                        onClick={handleToggleSettings}
+                        disableRipple
+                        disableTouchRipple
+                    >
+                        <MinimizeIcon />
+                        { toggleSettings ? <AccessAlarmIcon /> : <SettingsIcon/> }
+                    </Button>  
                 </Stack>
                 <Stack sx={styles.content__stack}>
-                    <Settings/> 
+                    {toggleSettings 
+                        ? <Settings />
+                        : <ControlPanel />
+                    }
                 </Stack>
             </Card>
         </>
@@ -57,4 +78,4 @@ const PostureWidget = () => {
 };
 
 
-export default PostureWidget;
+export default WaterWidget;
