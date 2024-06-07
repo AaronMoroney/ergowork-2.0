@@ -24,7 +24,6 @@ const styles = {
     time__display__stack:{
         display: 'flex', 
         flexDirection: 'row', 
-        justifyContent: 'space-between', 
         width: '50%'
     },
     time__typography:{
@@ -36,7 +35,8 @@ const styles = {
     button__stack:{
         display: 'flex', 
         flexDirection: 'row', 
-        alignItems: 'center'
+        alignItems: 'center',
+        marginLeft: 2,
     },
     time__adjust__button:{
         width: '10px', 
@@ -49,6 +49,9 @@ const styles = {
 }
 
 const Timer: FC = () => {
+
+    let minutes = 3;
+    let seconds = '00';
   
     return (
         <>
@@ -67,7 +70,7 @@ const Timer: FC = () => {
                     <Typography
                         variant='h4'
                     >
-                        {2}
+                        {`${minutes}:${seconds}`}
                     </Typography>
                     <Stack sx={styles.button__stack}>
                         <Button 
@@ -86,7 +89,7 @@ const Timer: FC = () => {
                 </Stack>
                 <FormControlLabel 
                     control={<Switch centerRipple checked={true} />} 
-                    label={'alerts ✅'} 
+                    label={'alerts '} 
                 />
             </Stack>
         </>
